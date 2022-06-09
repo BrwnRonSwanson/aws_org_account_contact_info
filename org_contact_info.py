@@ -16,11 +16,13 @@ def getAccounts():
         response = org.list_accounts(NextToken=response['NextToken'])
         results.extend(response['Accounts'])
 
-    org_bucket.put_object(Bucket="<insert bucket name here>", Body=results, Key=key_name)
+    org_bucket.put_object(Bucket="INSERT BUCKET NAME HERE", Body=results, Key=key_name)
+    print(results)
 
 def lambda_handler(event, context):
     try:
         getAccounts()
+        print("Successful output!")
     except botocore.exceptions.ClientError as error:
         print(error)
 
